@@ -1,0 +1,366 @@
+import React, { useState } from "react";
+
+// Stollix Branded One-Page Site (React + Tailwind)
+// Now using the exact gradient from your SVG asset (horizontal 90deg with 5 stops).
+
+export default function StollixSite() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-[#080808] text-[#F8F8F8] antialiased">
+      {/* Brand tokens & font imports */}
+      <style>{`
+        :root {
+          --stx-black: #080808;           /* Primary Black */
+          --stx-seasalt: #F8F8F8;         /* Primary Seasalt */
+          --stx-turquoise: #14F7D9;       /* Secondary Turquoise */
+          --stx-indigo: #9F77FF;          /* Accent Tropical Indigo */
+          --stx-midnight: #003837;        /* Secondary Midnight Green */
+          /* Aliases to mirror Dart names */
+          --stx-secondary400: var(--stx-turquoise);
+          --stx-accent: var(--stx-indigo);
+        }
+        /* Import brand fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&family=SUSE:wght@800&display=swap');
+        .font-heading { font-family: 'SUSE', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; }
+        .font-body { font-family: 'Onest', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; }
+        /* Exact CSS background based on the SVG's base linearGradient (horizontal L→R, 5 stops) */
+        .brand-gradient {
+          background-image: linear-gradient(
+            90deg,
+            #14f7d9 45%,
+            #1fecdc 49.2%,
+            #3dd0e4 56.6%,
+            #6ea3f1 66.4%,
+            #9f77ff 75%
+          );
+        }
+        .brand-ring { box-shadow: 0 0 0 1px rgba(20,247,217,0.08), 0 0 0 2px rgba(159,119,255,0.08); }
+      `}</style>
+
+      {/* Top Announcement / Ribbon */}
+      <div className="w-full brand-gradient text-[#080808] text-sm font-semibold tracking-wide text-center py-2">
+        Stollix • Transformă ideile în rezultate
+      </div>
+
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-[#080808]/60">
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            {/* Placeholder Logo Mark (swap with your SVG) */}
+            <div className="h-9 w-9 rounded-xl brand-gradient grid place-items-center">
+              <span className="sr-only">Stollix</span>
+              <svg viewBox="0 0 24 24" className="h-6 w-6 fill-[#080808]" aria-hidden>
+                <path d="M12 2l8 4.6v9.2L12 20l-8-4.6V6.6L12 2zm0 2.3L6 6.6v6.8l6 3.4 6-3.4V6.6L12 4.3z" />
+              </svg>
+            </div>
+            <span className="font-heading text-xl tracking-wide">Stollix</span>
+          </div>
+
+          <button
+            className="md:hidden inline-flex items-center justify-center rounded-xl p-2 border border-white/10 hover:bg-white/5"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-expanded={menuOpen}
+            aria-label="Open main menu"
+          >
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
+              <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+            </svg>
+          </button>
+
+          <ul className="hidden md:flex items-center gap-8 font-body text-sm text-white/80">
+            <li><a className="hover:text-white" href="#services">Servicii</a></li>
+            <li><a className="hover:text-white" href="#solutions">Soluții</a></li>
+            <li><a className="hover:text-white" href="#work">Proiecte</a></li>
+            <li><a className="hover:text-white" href="#about">Despre</a></li>
+            <li><a className="hover:text-white" href="#contact">Contact</a></li>
+          </ul>
+
+          <div className="hidden md:flex items-center gap-3">
+            <a href="#contact" className="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 font-medium">Consultanță</a>
+            <a href="#contact" className="px-4 py-2 rounded-xl font-medium text-[#080808] brand-gradient">Solicită ofertă</a>
+          </div>
+        </nav>
+
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div className="md:hidden border-t border-white/10">
+            <ul className="px-4 py-4 space-y-3 font-body">
+              {[
+                ["Servicii", "#services"],
+                ["Soluții", "#solutions"],
+                ["Proiecte", "#work"],
+                ["Despre", "#about"],
+                ["Contact", "#contact"],
+              ].map(([label, href]) => (
+                <li key={href}>
+                  <a onClick={() => setMenuOpen(false)} className="block py-2" href={href as string}>{label}</a>
+                </li>
+              ))}
+              <li className="pt-2 flex gap-2">
+                <a href="#contact" className="flex-1 text-center px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 font-medium">Consultanță</a>
+                <a href="#contact" className="flex-1 text-center px-4 py-2 rounded-xl font-medium text-[#080808] brand-gradient">Solicită ofertă</a>
+              </li>
+            </ul>
+          </div>
+        )}
+      </header>
+
+      {/* HERO */}
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full blur-3xl opacity-30 brand-gradient" />
+        <div className="pointer-events-none absolute -bottom-20 -right-24 h-72 w-72 rounded-full blur-3xl opacity-30 brand-gradient" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="font-heading tracking-[0.1em] text-4xl sm:text-5xl lg:text-6xl leading-tight">
+                <span className="block text-white">CONSTRUIEȘTE INTELIGENT.</span>
+                <span className="block bg-clip-text text-transparent brand-gradient">PROGRAMEAZĂ MAI SIMPLU.</span>
+              </h1>
+              <p className="mt-6 font-body text-white/70 text-lg max-w-prose">
+                Platforme web, aplicații și automatizări create cu grijă pentru performanță, scalabilitate și o experiență impecabilă.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#contact" className="px-6 py-3 rounded-2xl text-[#080808] font-semibold brand-gradient">Începe un proiect</a>
+                <a href="#work" className="px-6 py-3 rounded-2xl border border-white/10 hover:bg-white/5 font-semibold">Vezi proiecte</a>
+              </div>
+              <div className="mt-8 flex items-center gap-6 text-sm text-white/60">
+                <div className="flex items-center gap-2">
+                  <span className="inline-block h-2 w-2 rounded-full" style={{ background: 'var(--stx-secondary400)' }} />
+                  Livrare agilă
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="inline-block h-2 w-2 rounded-full" style={{ background: 'var(--stx-accent)' }} />
+                  Calitate garantată
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.03] border border-white/10 brand-ring p-3">
+                <div className="h-full w-full rounded-2xl bg-[#003837]/20 grid place-items-center">
+                  {/* Replace with a product shot / illustration */}
+                  <svg viewBox="0 0 200 200" className="w-3/5" aria-hidden>
+                    <defs>
+                      {/* Exact inline SVG gradient: horizontal L→R with 5 stops */}
+                      <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="0">
+                        <stop offset="45%" stopColor="#14f7d9" />
+                        <stop offset="49.2%" stopColor="#1fecdc" />
+                        <stop offset="56.6%" stopColor="#3dd0e4" />
+                        <stop offset="66.4%" stopColor="#6ea3f1" />
+                        <stop offset="75%" stopColor="#9f77ff" />
+                      </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#g)" strokeWidth="6" strokeLinecap="round">
+                      <rect x="20" y="40" width="160" height="100" rx="16" />
+                      <path d="M40 150h120" />
+                      <circle cx="60" cy="90" r="18" />
+                      <path d="M90 108l24-36 26 36" />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div className="absolute -bottom-6 -right-6 rounded-2xl border border-white/10 bg-[#0b0b0b] px-5 py-3 text-sm text-white/80">
+                <span className="font-semibold" style={{ color: 'var(--stx-secondary400)' }}>#</span> Stollix • www.stollix.com
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section id="services" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div className="flex items-end justify-between gap-6 flex-wrap">
+          <h2 className="font-heading tracking-[0.08em] text-3xl">Servicii</h2>
+          <a href="#contact" className="text-sm font-medium text-white/70 hover:text-white">Cere o consultanță →</a>
+        </div>
+        <div className="mt-8 grid md:grid-cols-3 gap-6">
+          {[
+            {
+              title: 'Aplicații Web',
+              desc: 'SPA/SSR, React, Next.js, API-uri sigure și performante.',
+              badge: 'Scalabil',
+            },
+            {
+              title: 'UX/UI & Brand',
+              desc: 'Experiențe moderne aliniate identității vizuale Stollix.',
+              badge: 'Modern',
+            },
+            {
+              title: 'Automatizări & AI',
+              desc: 'Integrare AI, RPA și pipeline-uri care economisesc timp.',
+              badge: 'Eficient',
+            },
+          ].map((c, i) => (
+            <article key={i} className="group rounded-2xl border border-white/10 p-6 bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
+              <div className="flex items-center justify-between">
+                <span className="text-xs tracking-widest uppercase px-3 py-1 rounded-full bg-white/5 border border-white/10">{c.badge}</span>
+                <svg viewBox="0 0 24 24" className="h-5 w-5 opacity-60 group-hover:opacity-100" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
+              <h3 className="mt-4 font-heading tracking-[0.08em] text-xl">{c.title}</h3>
+              <p className="mt-2 font-body text-white/70">{c.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* SOLUTIONS */}
+      <section id="solutions" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div className="rounded-3xl border border-white/10 bg-[#0b0b0b] p-8 md:p-12">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div>
+              <h2 className="font-heading tracking-[0.08em] text-3xl">Soluții la cheie</h2>
+              <p className="mt-4 font-body text-white/70">
+                De la MVP la produs matur, livrăm componente reutilizabile, analitice integrate și infrastructură gata de scalare.
+              </p>
+              <ul className="mt-6 space-y-3 font-body text-white/80">
+                {[
+                  'Design system bazat pe brand',
+                  'Bibliotecă de componente React',
+                  'CI/CD, observabilitate și SLO-uri',
+                  'SEO tehnic & web vitals'
+                ].map((li, idx) => (
+                  <li key={idx} className="flex items-center gap-3">
+                    <span className="h-2 w-2 rounded-full" style={{ background: idx % 2 ? 'var(--stx-accent)' : 'var(--stx-secondary400)' }} />
+                    {li}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8">
+                <a href="#contact" className="inline-block px-6 py-3 rounded-2xl text-[#080808] font-semibold brand-gradient">Programează un call</a>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {['Performanță A+','Accesibilitate','SEO','Securitate'].map((kpi, i) => (
+                <div key={kpi} className="rounded-2xl border border-white/10 bg-white/[0.02] p-6">
+                  <p className="text-sm text-white/60">{kpi}</p>
+                  <p className="mt-3 font-heading text-3xl tracking-wide" style={{ color: i % 2 ? 'var(--stx-accent)' : 'var(--stx-secondary400)' }}>Top 1%</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WORK */}
+      <section id="work" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="font-heading tracking-[0.08em] text-3xl">Proiecte</h2>
+        <p className="mt-3 font-body text-white/70 max-w-prose">Selecție de proiecte reprezentative. Înlocuiește aceste carduri cu studii de caz reale.</p>
+        <div className="mt-8 grid md:grid-cols-3 gap-6">
+          {[1,2,3].map((n)=> (
+            <figure key={n} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
+              <div className="aspect-[4/3] relative">
+                <div className="absolute inset-0 brand-gradient opacity-20 group-hover:opacity-30 transition-opacity" />
+                <div className="absolute inset-0 grid place-items-center">
+                  <svg viewBox="0 0 200 200" className="w-1/2" aria-hidden>
+                    <defs>
+                      {/* Per-card gradient identical to hero */}
+                      <linearGradient id={`g${n}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="0">
+                        <stop offset="45%" stopColor="#14f7d9" />
+                        <stop offset="49.2%" stopColor="#1fecdc" />
+                        <stop offset="56.6%" stopColor="#3dd0e4" />
+                        <stop offset="66.4%" stopColor="#6ea3f1" />
+                        <stop offset="75%" stopColor="#9f77ff" />
+                      </linearGradient>
+                    </defs>
+                    <g fill="none" stroke={`url(#g${n})`} strokeWidth="6" strokeLinecap="round">
+                      <rect x="30" y="40" width="140" height="80" rx="14" />
+                      <path d="M40 130h120" />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <figcaption className="p-5">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-heading tracking-[0.06em] text-lg">Studiu de caz #{n}</h3>
+                  <span className="text-xs px-2 py-1 rounded-full bg:white/5 border border-white/10">Web</span>
+                </div>
+                <p className="mt-2 font-body text-sm text-white/70">Rezultate măsurabile: +120% trafic organic, TTFB -40%, conversii +35%.</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h2 className="font-heading tracking-[0.08em] text-3xl">Despre Stollix</h2>
+            <p className="mt-4 font-body text-white/70 max-w-prose">
+              Suntem un studio tehnic care combină strategie, design și inginerie. Ne ghidăm după simplitate, consistență și performanță – valori reflectate în identitatea vizuală și în fiecare livrabil.
+            </p>
+            <dl className="mt-6 grid grid-cols-2 gap-4">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+                <dt className="text-xs text:white/60">Ani experiență</dt>
+                <dd className="font-heading text-2xl tracking-wide" style={{ color: 'var(--stx-secondary400)' }}>10+</dd>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+                <dt className="text-xs text:white/60">Proiecte livrate</dt>
+                <dd className="font-heading text-2xl tracking-wide" style={{ color: 'var(--stx-accent)' }}>50+</dd>
+              </div>
+            </dl>
+          </div>
+          <div className="rounded-3xl border border-white/10 p-6 bg-[#0b0b0b] brand-ring">
+            <blockquote className="font-body text-white/80">
+              „Stollix a transformat o idee ambițioasă într-o platformă stabilă și rapidă. Colaborarea a fost impecabilă.”
+            </blockquote>
+            <div className="mt-4 text-sm text-white/60">— Client B2B, ecommerce</div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div className="rounded-3xl border border:white/10 overflow-hidden">
+          <div className="grid md:grid-cols-2">
+            <div className="p-8 md:p-12 bg-[#0b0b0b]">
+              <h2 className="font-heading tracking-[0.08em] text-3xl">Hai să lucrăm împreună</h2>
+              <p className="mt-4 font-body text-white/70 max-w-prose">
+                Spune-ne pe scurt despre proiectul tău. Îți răspundem cu un plan de acțiune și o estimare.
+              </p>
+              <ul className="mt-6 space-y-2 text-white/70 font-body">
+                <li>• Email: hello@stollix.com</li>
+                <li>• Site: www.stollix.com</li>
+              </ul>
+            </div>
+            <form className="p-8 md:p-12 space-y-5 bg-white/[0.02]" onSubmit={(e)=>e.preventDefault()}>
+              <div>
+                <label className="block text-sm text:white/70 mb-2">Nume</label>
+                <input className="w-full bg-transparent rounded-xl border border-white/10 px-4 py-3 outline-none focus:border-white/30" placeholder="Numele tău" required />
+              </div>
+              <div>
+                <label className="block text-sm text:white/70 mb-2">Email</label>
+                <input type="email" className="w-full bg-transparent rounded-xl border border:white/10 px-4 py-3 outline-none focus:border:white/30" placeholder="you@company.com" required />
+              </div>
+              <div>
+                <label className="block text-sm text:white/70 mb-2">Mesaj</label>
+                <textarea className="w-full bg-transparent rounded-xl border border:white/10 px-4 py-3 outline-none focus:border:white/30" rows={4} placeholder="Detalii proiect, obiective, deadline…" required />
+              </div>
+              <button className="px-6 py-3 rounded-2xl text-[#080808] font-semibold brand-gradient">Trimite</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="mt-12 border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-lg brand-gradient" />
+            <span className="font-heading tracking-wide">Stollix</span>
+          </div>
+          <p className="text-sm text:white/60">© {new Date().getFullYear()} Stollix. Toate drepturile rezervate.</p>
+          <div className="flex items-center gap-4 text-sm text-white/70">
+            <a className="hover:text-white" href="#">LinkedIn</a>
+            <a className="hover:text-white" href="#">GitHub</a>
+            <a className="hover:text-white" href="#">X</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
