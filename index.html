@@ -177,13 +177,13 @@
             </header>
 
             {/* HERO */}
-            <section className="relative overflow-hidden" data-aos="fade-up">
+            <section className="relative overflow-hidden">
               <div className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full blur-3xl opacity-30 brand-gradient" />
               <div className="pointer-events-none absolute -bottom-20 -right-24 h-72 w-72 rounded-full blur-3xl opacity-30 brand-gradient" />
 
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-20">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                  <div>
+                  <div data-aos="fade-right">
                     <h1 className="font-heading tracking-[0.1em] text-4xl sm:text-5xl lg:text-6xl leading-tight">
                       <span className="block text-white">CONSTRUIEȘTE INTELIGENT.</span>
                       <span className="block bg-clip-text text-transparent brand-gradient">PROGRAMEAZĂ MAI SIMPLU.</span>
@@ -207,7 +207,7 @@
                     </div>
                   </div>
 
-                  <div className="relative">
+                  <div className="relative" data-aos="fade-left">
                     <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.03] border border-white/10 brand-ring p-3">
                       <div className="h-full w-full rounded-2xl bg-[#003837]/20 grid place-items-center">
                         {/* Replace with a product shot / illustration */}
@@ -247,7 +247,7 @@
                   { title: 'UX/UI & Brand', desc: 'Experiențe moderne aliniate identității vizuale Stollix.', badge: 'Modern' },
                   { title: 'Automatizări & AI', desc: 'Integrare AI, RPA și pipeline-uri care economisesc timp.', badge: 'Eficient' },
                 ].map((c, i) => (
-                  <article key={i} data-aos="fade-up" className="group rounded-2xl border border-white/10 p-6 bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
+                  <article key={i} data-aos="zoom-in" className="group rounded-2xl border border-white/10 p-6 bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
                     <div className="flex items-center justify-between">
                       <span className="text-xs tracking-widest uppercase px-3 py-1 rounded-full bg-white/5 border border-white/10">{c.badge}</span>
                       <svg viewBox="0 0 24 24" className="h-5 w-5 opacity-60 group-hover:opacity-100" fill="none" stroke="currentColor" strokeWidth="2">
@@ -284,7 +284,7 @@
                   </div>
                   <div className="grid sm:grid-cols-2 gap-4">
                     {['Performanță A+','Accesibilitate','SEO','Securitate'].map((kpi, i) => (
-                      <div key={kpi} data-aos="fade-up" className="rounded-2xl border border-white/10 bg-white/[0.02] p-6">
+                      <div key={kpi} data-aos="zoom-in" className="rounded-2xl border border-white/10 bg-white/[0.02] p-6">
                         <p className="text-sm text-white/60">{kpi}</p>
                         <p className="mt-3 font-heading text-3xl tracking-wide" style={{ color: i % 2 ? 'var(--stx-accent)' : 'var(--stx-secondary400)' }}>Top 1%</p>
                       </div>
@@ -300,7 +300,7 @@
               <p className="mt-3 font-body text-white/70 max-w-prose">Selecție de proiecte reprezentative. Înlocuiește aceste carduri cu studii de caz reale.</p>
               <div className="mt-8 grid md:grid-cols-3 gap-6">
                 {[1,2,3].map((n)=> (
-                  <figure key={n} data-aos="fade-up" className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
+                  <figure key={n} data-aos="zoom-in" className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
                     <div className="aspect-[4/3] relative">
                       <div className="absolute inset-0 brand-gradient opacity-20 group-hover:opacity-30 transition-opacity" />
                       <div className="absolute inset-0 grid place-items-center">
