@@ -52,11 +52,8 @@
               .brand-gradient {
                 background-image: linear-gradient(
                   45deg,
-                  #14f7d9 45%,
-                  #1fecdc 49.2%,
-                  #3dd0e4 56.6%,
-                  #6ea3f1 66.4%,
-                  #9f77ff 75%
+                  #14f7d9 65%,
+                  #9f77ff 80%
                 );
               }
               .brand-ring { box-shadow: 0 0 0 1px rgba(20,247,217,0.08), 0 0 0 2px rgba(159,119,255,0.08); }
@@ -87,7 +84,6 @@
                 </ul>
 
                 <div className="hidden md:flex items-center gap-3">
-                  <a href="#contact" className="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 font-medium">Consultanță</a>
                   <a href="#contact" className="px-4 py-2 rounded-xl font-medium text-[#080808] brand-gradient">Solicită ofertă</a>
                 </div>
               </nav>
@@ -171,9 +167,6 @@
                         </svg>
                       </div>
                     </div>
-                    <div className="absolute -bottom-6 -right-6 rounded-2xl border border-white/10 bg-[#0b0b0b] px-5 py-3 text-sm text-white/80">
-                      <span className="font-semibold" style={{ color: 'var(--stx-secondary400)' }}>#</span> Stollix • www.stollix.com
-                    </div>
                   </div>
                 </div>
               </div>
@@ -183,7 +176,6 @@
             <section id="services" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
               <div className="flex items-end justify-between gap-6 flex-wrap">
                 <h2 className="font-heading tracking-[0.08em] text-3xl">Servicii</h2>
-                <a href="#contact" className="text-sm font-medium text-white/70 hover:text-white">Cere o consultanță →</a>
               </div>
               <div className="mt-8 grid md:grid-cols-3 gap-6">
                 {[
@@ -341,16 +333,16 @@
             {/* FOOTER */}
             <footer className="mt-12 border-t border-white/10">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-lg brand-gradient" />
-                  <span className="font-heading tracking-wide">Stollix</span>
-                </div>
-                <p className="text-sm text:white/60">© {new Date().getFullYear()} Stollix. Toate drepturile rezervate.</p>
-                <div className="flex items-center gap-4 text-sm text-white/70">
-                  <a className="hover:text-white" href="#">LinkedIn</a>
-                  <a className="hover:text-white" href="#">GitHub</a>
-                  <a className="hover:text-white" href="#">X</a>
-                </div>
+              <div className="flex items-center gap-3">
+              <img src="assets/images/logo.svg" alt="Stollix logo" className="h-8 w-auto" />
+              <span className="font-heading tracking-wide">Stollix</span>
+              </div>
+              <p className="text-sm text-white/60">© {new Date().getFullYear()} Stollix. Toate drepturile rezervate.</p>
+              <div className="flex items-center gap-4 text-sm text-white/70">
+              <a className="hover:text-white" href="#">LinkedIn</a>
+              <a className="hover:text-white" href="#">GitHub</a>
+              <a className="hover:text-white" href="#">X</a>
+              </div>
               </div>
             </footer>
           </div>
