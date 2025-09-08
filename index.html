@@ -31,6 +31,7 @@
 
       function StollixSite() {
         const [menuOpen, setMenuOpen] = useState(false);
+        const [isClosing, setIsClosing] = useState(false);
 
         return (
           <div className="min-h-screen bg-[#080808] text-[#F8F8F8] antialiased">
@@ -91,22 +92,70 @@
               </nav>
 
               {/* Mobile menu */}
-              {menuOpen && (
-                <div className="md:hidden border-t border-white/10">
-                  <ul className="px-4 py-4 space-y-3 font-body">
-                    {[
-                      ["Servicii", "#services"],
-                      ["Soluții", "#solutions"],
-                      ["Proiecte", "#work"],
-                      ["Despre", "#about"],
-                      ["Contact", "#contact"],
-                    ].map(([label, href]) => (
-                      <li key={href}>
-                        <a onClick={() => setMenuOpen(false)} className="block py-2" href={href}>{label}</a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {(menuOpen || isClosing) && (
+                <>
+                  <style>{`
+                    @keyframes slideDown {
+                      from { opacity: 0; transform: translateY(-10px); }
+                      to { opacity: 1; transform: translateY(0); }
+                    }
+                    @keyframes slideUp {
+                      from { opacity: 1; transform: translateY(0); }
+                      to { opacity: 0; transform: translateY(-10px); }
+                    }
+                    .animate-slideDown {
+                      animation: slideDown 0.25s ease-out forwards;
+                    }
+                    .animate-slideUp {
+                      animation: slideUp 0.25s ease-in forwards;
+                    }
+                  `}</style>
+              
+                  {/* Backdrop */}
+                  <div
+                    className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+                    onClick={() => {
+                      setIsClosing(true);
+                      setTimeout(() => {
+                        setIsClosing(false);
+                        setMenuOpen(false);
+                      }, 250); // match animation duration
+                    }}
+                  />
+              
+                  {/* Dropdown */}
+                  <div
+                    className={`absolute top-full left-0 z-50 w-full border-t border-white/10 bg-[#080808] ${
+                      menuOpen && !isClosing ? "animate-slideDown" : "animate-slideUp"
+                    }`}
+                  >
+                    <ul className="px-4 py-4 space-y-3 font-body">
+                      {[
+                        ["Servicii", "#services"],
+                        ["Soluții", "#solutions"],
+                        ["Proiecte", "#work"],
+                        ["Despre", "#about"],
+                        ["Contact", "#contact"],
+                      ].map(([label, href]) => (
+                        <li key={href}>
+                          <a
+                            onClick={() => {
+                              setIsClosing(true);
+                              setTimeout(() => {
+                                setIsClosing(false);
+                                setMenuOpen(false);
+                              }, 250);
+                            }}
+                            className="block py-2"
+                            href={href}
+                          >
+                            {label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </>
               )}
             </header>
 
